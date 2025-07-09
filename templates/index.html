@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenizer File Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .upload-form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .upload-form input[type="file"] {
+            display: none;
+        }
+
+        .upload-form label {
+            display: block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-form label:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Amenizer File Converter</h1>
+
+        <form action="/convert" method="post" class="upload-form" enctype="multipart/form-data">
+            <input type="file" name="raw_file" id="raw_file" accept=".raw" onchange="updateFileName(this)">
+            <label id="file-label" for="raw_file">Choose .raw File</label>
+            <div id="file-name" style="margin-top: 10px;"></div> <!-- Added div to display file name -->
+            <div class="error">{{ error }}</div>
+            <button type="submit">Convert</button>
+        </form>
+        <p align="center">File should be 32768 samples long. (32768 Hz)<br/>
+        Exactly 1 second loop.<br/>
+8-bit unsigned<br/>
+Mono<br/>
+File type is (raw with no header).<br/></p>
+
+        <!-- Additional content -->
+        <div class="additional-info">
+            <p><strong>What is This?</strong></p>
+            <p>This tool will convert .raw sound file loops into a .gb file readable by an emulator or a hardware Game Boy. It will replace the amen loop of amenizer with a loop of your own.</p><br/>
+            <p><strong>What is Amenizer?</strong></p>
+            <p>A sample masher that lets you apply live effects and rearrangement to a loop.</p>
+            <p>Developed by nitro2k01 in 2013 for his Game Boy project week #6.</p>
+            <p>While the loop is playing, the ROM sends out an LSDJ compatible sync signal on the link port.</p><br/>
+            <p><strong>Amenizer Controls</strong></p>
+            <p>You can apply effects by holding either B or A, or both (A enables a stutter effect, B enables a granular/repeater).</p>
+            <p>Effect values can not be changed while one direction on the D-Pad is held down. The purpose of this is that you could be able to “roll” around on the D-Pad to mash the beat while an effect is triggered without changing the effect values.</p>
+            <p>You can also press Select+Start to enable a “special” effect. When this effect is active, the pitch of the wave channel does not follow the general pitch of the loop. This causes a phasing type effect when adjusting the pitch.</p>
+            <p>Start - Start/Stop playback of the loop</p>
+            <p>Select+Up/Down - Pitch loop</p>
+            <p>D-Pad - Rearrange the loop in 16th “slices”</p>
+            <p>B+Up/Down - Control the repeat size</p>
+            <p>A+Left/Right - Control the stutter length</p>
+            <p>Select+Start - Enable a “special” effect</p>
+        </div><br/>
+<p><strong>Export settings:</strong></p>
+<p>Below is a screencap from the free sound editing program "Audacity"</p>
+        <div class="image-container">
+            <img align="center" src="/static/audacity.PNG" alt="Audacity" style="max-width: 100%;">
+        </div><br/>
+                <div class="image-container">
+            <img align="center" src="/static/controls.png" alt="Audacity" style="max-width: 100%;">
+        </div><br/>
+                            <div class="author">
+                        Author: crunchypotato
+                    </div>
+        <!-- Discord link -->
+        <div class="discord-link">
+            <a href="https://discord.gg/32wfnbkCtE" target="_blank">Chiptune Anamnesis (Discord)</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript function to update the label text with the selected file name
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            var label = document.getElementById('file-label');
+            var fileNameDisplay = document.getElementById('file-name');
+            label.innerText = fileName;
+            fileNameDisplay.innerText = 'Selected file: ' + fileName; // Display file name in another div
+        }
+    </script>
+</body>
+</html>
