@@ -30,6 +30,6 @@ A small Python Flask web app that takes a `.raw` audio sample, applies a 4-bit c
    git clone https://github.com/your-username/gb-amenizer-replacer.git
    cd gb-amenizer-replacer
 
-## 📖 Try the App
+## 🔗 Try the App
 - https://crunchypotato.pythonanywhere.com/
    
