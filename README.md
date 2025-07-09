@@ -19,7 +19,7 @@ A small Python Flask web app that takes a `.raw` audio sample, applies a 4-bit c
 - Python 3.7+
 - [pipenv](https://pipenv.pypa.io/en/latest/) or `pip`
 - A copy of `amenizer.gb` in the project root
-- A `.raw` PCM sample file (8-bit, mono)
+- A `.raw` with no header PCM sample file (8-bit unsigned, mono), 32768 samples long. (32768 Hz), Exactly 1 second loop.
 
 ---
 
